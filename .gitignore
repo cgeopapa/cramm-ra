@@ -23,5 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 #data reference dir
-/sampledata
-/sampledata/*
+sampledata/
+
+#env
+.env

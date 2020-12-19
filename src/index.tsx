@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import AssetCartographyView from './view/AssetCartographyView';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AssetCartographyView />
   </React.StrictMode>,
   document.getElementById('root')
 );
