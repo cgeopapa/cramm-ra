@@ -2,6 +2,7 @@ import firebase from 'firebase'
 import Asset from '../model/Asset';
 import * as dotenv from 'dotenv';
 import Category from '../model/Category';
+import Owner from '../model/Owner';
 
 export default class FirebaseDAO {
     private app: firebase.app.App;
@@ -28,6 +29,31 @@ export default class FirebaseDAO {
         this.db = this.app.database();
     }
 
+    async getOwners(){
+        let allOwners: Owner[] = [];
+        await this.db.ref("owners").once("value", snap => {
+            snap.forEach(owner => {
+                allOwners.push(new Owner(
+                    owner.val().name,
+                    owner.val().email,
+                    owner.key ?? ''
+                ))
+            })
+        })
+        return allOwners;
+    }
+
+    async addOwner(owner: Owner){
+        try{
+            const ref = await this.db.ref("owners").push(owner);
+            return ref.key;
+        }
+        catch(e){
+            console.error(e);
+            return false;
+        }
+    }
+
     async getCategories(){
         let allCategories: Category[] = [];
         await this.db.ref("category").once("value", snap => {
@@ -48,7 +74,15 @@ export default class FirebaseDAO {
                 allAssets.push(new Asset(
                     asset.val().name,
                     asset.val().description,
-                    new Category(asset.child("category").val().name, asset.child("category").val().id.toString()),
+                    new Category(
+                        asset.val().category.name, 
+                        asset.val().category.id.toString()
+                    ),
+                    new Owner(
+                        asset.val().owner.name,
+                        asset.val().owner.email,
+                        asset.val().owner.id,
+                    ),
                     asset.key ?? ''
                     ))
             });
@@ -56,9 +90,9 @@ export default class FirebaseDAO {
         return allAssets;
     }
 
-    async addAsset(asset: any) {
+    async addAsset(asset: Asset) {
         try{
-            const ref: any = await this.db.ref("assets").push(asset)
+            const ref: any = await this.db.ref("assets").push(asset);
             return ref.key;
         }
         catch(e){
