@@ -1,13 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import AssetCartographyView from './view/AssetCartographyView';
 import reportWebVitals from './reportWebVitals';
+import AssetCartographyView from './view/AssetCartographyView';
+import HomeView from './view/HomeView';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <AssetCartographyView />
-  </React.StrictMode>,
+  <BrowserRouter>
+    <Switch>
+      <Route exact path='/' component={HomeView}/>
+      <Route exact path='/asset-cart' component={AssetCartographyView}/>
+    </Switch>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
