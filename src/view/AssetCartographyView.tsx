@@ -86,16 +86,28 @@ export default class AssetCartographyView extends Component{
 }
 
     inputTextEditor(asset: any, field: string) {
-        return <InputText type="text" defaultValue={asset[field]}
+        return <InputText type="text" placeholder={field} defaultValue={asset[field]}
         onChange={(e) => this.state.editingAsset[field]=e.currentTarget.value}/>
     }
 
     inputCategoryEditor(asset: any) {
         return (
             <Dropdown optionLabel="name" value={this.state.editingAsset.category} options={this.state.categories} 
+            appendTo={document.body} placeholder="category"
             onChange={(e) => {
                 let editingAsset = this.state.editingAsset;
                 editingAsset.category = e.value;
+                this.setState({editingAsset: editingAsset})}}/>
+        )
+    }
+
+    inputLocationEditor(asset: any) {
+        return (
+            <Dropdown optionLabel="name" optionValue="name" value={this.state.editingAsset.location} options={this.state.assets}
+            appendTo={document.body} placeholder="location"
+            onChange={(e) => {
+                let editingAsset = this.state.editingAsset;
+                editingAsset.location = e.value;
                 this.setState({editingAsset: editingAsset})}}/>
         )
     }
@@ -104,6 +116,7 @@ export default class AssetCartographyView extends Component{
         return (
             <div style={{display:"flex", flexDirection:"column"}}>
                 <Dropdown optionLabel="name" value={this.state.editingAsset.owner} options={this.state.owners} 
+                appendTo={document.body} placeholder="owner"
                 onChange={(e) => {
                     let editingAsset = this.state.editingAsset;
                     editingAsset.owner = e.value;
@@ -159,6 +172,7 @@ export default class AssetCartographyView extends Component{
                     <Column field="description" header="Description" sortable editor={(e) => this.inputTextEditor(e.rowData, "description")}/>
                     <Column field="category" header="Category" sortable body={this.categoryTemplate} editor={(e) => this.inputCategoryEditor(e.rowData)}/>
                     <Column field="owner" header="Owner" sortable body={this.ownerTemplate} editor={(e) => this.inputOwnerEditor(e.rowData)}/>
+                    <Column field="location" header="Location" sortable editor={(e) => this.inputLocationEditor(e.rowData)}/>
                     <Column rowEditor headerStyle={{ width: '7rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
                 </DataTable>
             </div>

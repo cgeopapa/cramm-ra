@@ -7,9 +7,10 @@ export default class Asset
     public description: string = '';
     public category: Category = new Category();
     public owner: Owner = new Owner();
+    public location: string = '';
     public id?: string = 'new';
 
-    constructor(name?: string, description?: string, category?: Category, owner?: Owner, id?: string)
+    constructor(name?: string, description?: string, category?: Category, owner?: Owner, location?: string, id?: string)
     {
         if(name){
             this.name = name;
@@ -22,6 +23,9 @@ export default class Asset
         }
         if(owner){
             this.owner = owner;
+        }
+        if(location){
+            this.location = location;
         }
         if(id){
             this.id = id;
