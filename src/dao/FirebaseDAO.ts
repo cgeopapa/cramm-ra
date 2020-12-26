@@ -84,6 +84,8 @@ export default class FirebaseDAO {
                         asset.val().owner.id,
                     ),
                     asset.val().location,
+                    parseInt(asset.val().confInternal),
+                    parseInt(asset.val().confExternal),
                     asset.key ?? ''
                     ))
             });

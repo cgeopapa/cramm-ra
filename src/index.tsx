@@ -5,12 +5,14 @@ import reportWebVitals from './reportWebVitals';
 import AssetCartographyView from './view/AssetCartographyView';
 import HomeView from './view/HomeView';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import AssetEvaluationView from './view/AssetEvaluationView';
 
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route exact path='/' component={HomeView}/>
       <Route exact path='/asset-cart' component={AssetCartographyView}/>
+      <Route exact path='/asset-eval' component={AssetEvaluationView}/>
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')

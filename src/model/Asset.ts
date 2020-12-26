@@ -8,9 +8,18 @@ export default class Asset
     public category: Category = new Category();
     public owner: Owner = new Owner();
     public location: string = '';
+    public confInternal: number = -1;
+    public confExternal: number = -1;
     public id?: string = 'new';
 
-    constructor(name?: string, description?: string, category?: Category, owner?: Owner, location?: string, id?: string)
+    constructor(name?: string, 
+        description?: string, 
+        category?: Category, 
+        owner?: Owner, 
+        location?: string, 
+        confInternal?: number,
+        confExternal?: number,
+        id?: string)
     {
         if(name){
             this.name = name;
@@ -26,6 +35,12 @@ export default class Asset
         }
         if(location){
             this.location = location;
+        }
+        if(confInternal){
+            this.confInternal = confInternal;
+        }
+        if(confExternal){
+            this.confExternal = confExternal;
         }
         if(id){
             this.id = id;

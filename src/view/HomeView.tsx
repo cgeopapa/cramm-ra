@@ -18,14 +18,16 @@ export default class HomeView extends Component{
                         <h2 className="p-m-2 p-text-normal"
                         style={{color:"white"}}>Step 1: Asset Cartography</h2>
                         <Link to="/asset-cart">
-                            <Button label="Asset Chartography" className="p-button-raised p-button-rounded"/>
+                            <Button label="Map Assets" className="p-button-raised p-button-rounded"/>
                         </Link>
                     </div>
                     <div className="p-d-flex p-ai-center p-flex-column p-p-4" 
                     style={{backgroundColor: "#00fa", width:"100%"}}>
                         <h2 className="p-m-2 p-text-normal"
                         style={{color:"white"}}>Step 2: Asset Evaluation</h2>
-                        <Button label="Under Construction..." disabled className="p-button-raised p-button-rounded"/>
+                        <Link to="/asset-eval">
+                            <Button label="Evaluate Assets" className="p-button-raised p-button-rounded"/>
+                        </Link>
                     </div>
                     <div className="p-d-flex p-ai-center p-flex-column p-p-4" 
                     style={{backgroundColor: "#00fb", width:"100%"}}>
