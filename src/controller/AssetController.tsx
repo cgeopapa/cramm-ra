@@ -4,8 +4,9 @@ import Asset from "../model/Asset";
 export default class AssetController {
     private dao = new FirebasaDAO();
     
-    getAssets(){
-        return this.dao.getAssets();
+    async getAssets(){
+        const wtf = await this.dao.getAssets();
+        return wtf;
     }
 
     async getAssetsForEditTable(){
@@ -29,5 +30,21 @@ export default class AssetController {
                 return false;
             }
         }
+    }
+
+    public getConfidentialityScore(asset: Asset){
+        return Math.max(asset.confInternal, asset.confExternal);
+    }
+
+    public getIntegrityScore(asset: Asset){
+        return Math.max(asset.intSome, asset.intTotal);
+    }
+
+    public getAvailabilityScore(asset: Asset){
+        return Math.max(asset.av1d, asset.av1h, asset.av1m, asset.av1w, asset.av2d, asset.av30m);
+    }
+
+    public getOverallScore(asset: Asset){
+        return Math.max(this.getConfidentialityScore(asset), this.getIntegrityScore(asset), this.getAvailabilityScore(asset));
     }
 }

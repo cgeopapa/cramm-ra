@@ -10,6 +10,14 @@ export default class Asset
     public location: string = '';
     public confInternal: number = -1;
     public confExternal: number = -1;
+    public intTotal: number = -1;
+    public intSome: number = -1;
+    public av30m: number = -1;
+    public av1h: number = -1;
+    public av1d: number = -1;
+    public av2d: number = -1;
+    public av1w: number = -1;
+    public av1m: number = -1;
     public id?: string = 'new';
 
     constructor(name?: string, 
@@ -19,6 +27,14 @@ export default class Asset
         location?: string, 
         confInternal?: number,
         confExternal?: number,
+        intTotal?: number,
+        intSome?: number,
+        av30m?: number,
+        av1h?: number,
+        av1d?: number,
+        av2d?: number,
+        av1w?: number,
+        av1m?: number,
         id?: string)
     {
         if(name){
@@ -41,6 +57,30 @@ export default class Asset
         }
         if(confExternal){
             this.confExternal = confExternal;
+        }
+        if(intTotal){
+            this.intTotal = intTotal;
+        }
+        if(intSome){
+            this.intSome = intSome;
+        }
+        if(av30m){
+            this.av30m = av30m;
+        }
+        if(av1h){
+            this.av1h = av1h;
+        }
+        if(av1d){
+            this.av1d = av1d;
+        }
+        if(av2d){
+            this.av2d = av2d;
+        }
+        if(av1w){
+            this.av1w = av1w;
+        }
+        if(av1m){
+            this.av1m = av1m;
         }
         if(id){
             this.id = id;

@@ -68,7 +68,7 @@ export default class FirebaseDAO {
     }
 
     async getAssets() {
-        let allAssets: any[] = [];
+        let allAssets: Asset[] = [];
         await this.db.ref("assets").once("value", snap => {
             snap.forEach(asset => {
                 allAssets.push(new Asset(
@@ -86,6 +86,14 @@ export default class FirebaseDAO {
                     asset.val().location,
                     parseInt(asset.val().confInternal),
                     parseInt(asset.val().confExternal),
+                    parseInt(asset.val().intTotal),
+                    parseInt(asset.val().intSome),
+                    parseInt(asset.val().av30m),
+                    parseInt(asset.val().av1h),
+                    parseInt(asset.val().av1d),
+                    parseInt(asset.val().av2d),
+                    parseInt(asset.val().av1w),
+                    parseInt(asset.val().av1m),
                     asset.key ?? ''
                     ))
             });
@@ -109,6 +117,7 @@ export default class FirebaseDAO {
             return true;
         }
         catch(e){
+            console.error(e);
             return false;
         }
     }
