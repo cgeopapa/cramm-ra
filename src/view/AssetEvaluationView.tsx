@@ -146,7 +146,7 @@ export default class AssetEvaluationView extends Component{
         return(
             <div style={{width:"100%", height:"100%"}} className="card">
                 <DataTable loading={this.state.loading} value={this.state.assets}
-                sortMode="multiple" className="p-datatable-striped p-datatable-gridlines p-datatable-sm" selectionMode="single"
+                sortMode="multiple" className="p-datatable-striped p-datatable-gridlines p-datatable-sm p-card" selectionMode="single"
                 header={header} headerColumnGroup={headerGroup} resizableColumns rowClassName={rowClass}
                 scrollable frozenWidth="200px">
                     <Column field="name" header="Asset Name" headerStyle={{ width: '200px', height: '117px' }} style={{height: '56px'}} frozen sortable/>

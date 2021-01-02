@@ -13,7 +13,7 @@ export default class HomeView extends Component{
             <div className="p-d-flex p-jc-center">
                 <div className="p-d-flex p-flex-column p-ai-center" style={{width:"100%"}}>
                     <h1 className="p-text-normal">CRAMM Risk Assessment Tool</h1>
-                    <div className="p-d-flex p-ai-center p-flex-column p-p-4" 
+                    <div className="p-d-flex p-ai-center p-flex-column p-p-4 p-card" 
                     style={{backgroundColor: "#00f9", width:"100%"}}>
                         <h2 className="p-m-2 p-text-normal"
                         style={{color:"white"}}>Step 1: Asset Cartography</h2>
@@ -21,7 +21,7 @@ export default class HomeView extends Component{
                             <Button label="Map Assets" className="p-button-raised p-button-rounded"/>
                         </Link>
                     </div>
-                    <div className="p-d-flex p-ai-center p-flex-column p-p-4" 
+                    <div className="p-d-flex p-ai-center p-flex-column p-p-4 p-card" 
                     style={{backgroundColor: "#00fa", width:"100%"}}>
                         <h2 className="p-m-2 p-text-normal"
                         style={{color:"white"}}>Step 2: Asset Evaluation</h2>
@@ -29,13 +29,13 @@ export default class HomeView extends Component{
                             <Button label="Evaluate Assets" className="p-button-raised p-button-rounded"/>
                         </Link>
                     </div>
-                    <div className="p-d-flex p-ai-center p-flex-column p-p-4" 
+                    <div className="p-d-flex p-ai-center p-flex-column p-p-4 p-card" 
                     style={{backgroundColor: "#00fb", width:"100%"}}>
                         <h2 className="p-m-2 p-text-normal"
                         style={{color:"white"}}>Step 3: Threat Evaluation</h2>
                         <Button label="Under Construction..." disabled className="p-button-raised p-button-rounded"/>
                     </div>
-                    <div className="p-d-flex p-ai-center p-flex-column p-p-4" 
+                    <div className="p-d-flex p-ai-center p-flex-column p-p-4 p-card" 
                     style={{backgroundColor: "#00fc", width:"100%"}}>
                         <h2 className="p-m-2 p-text-normal"
                         style={{color:"white"}}>Results Table</h2>

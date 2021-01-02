@@ -164,7 +164,7 @@ export default class AssetCartographyView extends Component{
             <h1 className="p-text-light p-m-0">Asset Chartography tool</h1>
         )
         return (
-            <div style={{width:"100%", height:"100%"}} className="card">
+            <div style={{width:"100%", height:"100%"}} className="p-card">
                 <DataTable loading={this.state.loading} value={this.state.assets} editMode="row" sortMode="multiple" className="p-datatable-striped"
                 resizableColumns columnResizeMode="fit" header={header}
                 onRowEditInit={(e) => this.onRowEditInit(e)} onRowEditCancel={(e) => this.onRowEditCancel(e)} onRowEditSave={(e) => this.onRowEditSave(e)}>
