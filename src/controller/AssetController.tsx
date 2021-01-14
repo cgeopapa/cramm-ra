@@ -5,8 +5,7 @@ export default class AssetController {
     private dao = new FirebasaDAO();
     
     async getAssets(){
-        const wtf = await this.dao.getAssets();
-        return wtf;
+        return await this.dao.getAssets();
     }
 
     async getAssetsForEditTable(){

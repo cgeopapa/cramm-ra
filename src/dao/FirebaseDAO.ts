@@ -3,6 +3,7 @@ import Asset from '../model/Asset';
 import * as dotenv from 'dotenv';
 import Category from '../model/Category';
 import Owner from '../model/Owner';
+import Threat from "../model/Threat";
 
 export default class FirebaseDAO {
     private app: firebase.app.App;
@@ -71,31 +72,9 @@ export default class FirebaseDAO {
         let allAssets: Asset[] = [];
         await this.db.ref("assets").once("value", snap => {
             snap.forEach(asset => {
-                allAssets.push(new Asset(
-                    asset.val().name,
-                    asset.val().description,
-                    new Category(
-                        asset.val().category.name, 
-                        asset.val().category.id.toString()
-                    ),
-                    new Owner(
-                        asset.val().owner.name,
-                        asset.val().owner.email,
-                        asset.val().owner.id,
-                    ),
-                    asset.val().location,
-                    parseInt(asset.val().confInternal),
-                    parseInt(asset.val().confExternal),
-                    parseInt(asset.val().intTotal),
-                    parseInt(asset.val().intSome),
-                    parseInt(asset.val().av30m),
-                    parseInt(asset.val().av1h),
-                    parseInt(asset.val().av1d),
-                    parseInt(asset.val().av2d),
-                    parseInt(asset.val().av1w),
-                    parseInt(asset.val().av1m),
-                    asset.key ?? ''
-                    ))
+                const a: Asset = asset.val();
+                a.id = asset.key ?? '';
+                allAssets.push(a)
             });
         })
         return allAssets;
@@ -117,6 +96,40 @@ export default class FirebaseDAO {
             return true;
         }
         catch(e){
+            console.error(e);
+            return false;
+        }
+    }
+
+    async getThreats(){
+        let allThreats: Threat[] = [];
+        await this.db.ref("threats").once("value", snap => {
+            snap.forEach(threat => {
+                const t: Threat = threat.val();
+                t.id = threat.key ?? '';
+                allThreats.push(t)
+            })
+        })
+        return allThreats;
+    }
+
+    async addThreat(threat: Threat){
+        try{
+            await this.db.ref("threats").push(threat);
+            return true;
+        }
+        catch (e){
+            console.error(e);
+            return false;
+        }
+    }
+
+    async updateThreat(threat: Threat){
+        try{
+            await this.db.ref(`threats/${threat.id}`).set(threat);
+            return true;
+        }
+        catch (e){
             console.error(e);
             return false;
         }

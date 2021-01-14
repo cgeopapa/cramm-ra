@@ -1,0 +1,29 @@
+import FirebaseDAO from "../dao/FirebaseDAO";
+import Threat from "../model/Threat";
+
+export default class ThreatController{
+    dao = new FirebaseDAO();
+
+    public async getThreats(){
+        return await this.dao.getThreats();
+    }
+
+    public async getThreatsForTable(){
+        const threats: Threat[] = await this.dao.getThreats();
+        threats.push(new Threat());
+        return threats;
+    }
+
+    public async createThreat(threat: Threat){
+        return await this.dao.addThreat(threat);
+    }
+
+    public async updateThreat(threat: Threat){
+        if(threat.id === ""){
+            return await this.createThreat(threat);
+        }
+        else{
+            return await this.dao.updateThreat(threat);
+        }
+    }
+}

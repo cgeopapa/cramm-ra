@@ -6,6 +6,7 @@ import AssetCartographyView from './view/AssetCartographyView';
 import HomeView from './view/HomeView';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import AssetEvaluationView from './view/AssetEvaluationView';
+import ThreatEvaluationView from './view/ThreadEvaluationView';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -13,6 +14,7 @@ ReactDOM.render(
       <Route exact path='/' component={HomeView}/>
       <Route exact path='/asset-cart' component={AssetCartographyView}/>
       <Route exact path='/asset-eval' component={AssetEvaluationView}/>
+      <Route exact path='/threat-eval' component={ThreatEvaluationView}/>
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')

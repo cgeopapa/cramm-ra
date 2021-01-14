@@ -31,6 +31,8 @@ export default class AssetEvaluationView extends Component{
             assets: await this.assetsController.getAssets(),
             loading: false
         });
+
+        console.log(this.state.assets);
     }
 
     numField(asset: any, field: string){

@@ -33,7 +33,9 @@ export default class HomeView extends Component{
                     style={{backgroundColor: "#00fb", width:"100%"}}>
                         <h2 className="p-m-2 p-text-normal"
                         style={{color:"white"}}>Step 3: Threat Evaluation</h2>
-                        <Button label="Under Construction..." disabled className="p-button-raised p-button-rounded"/>
+                        <Link to="/threat-eval">
+                            <Button label="Evaluate Threats" className="p-button-raised p-button-rounded"/>
+                        </Link>
                     </div>
                     <div className="p-d-flex p-ai-center p-flex-column p-p-4 p-card" 
                     style={{backgroundColor: "#00fc", width:"100%"}}>
