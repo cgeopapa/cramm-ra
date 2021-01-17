@@ -22,8 +22,6 @@ import {VulLevels} from "../model/VulLevels";
 export default class ThreatEvaluationView extends Component{
     private threatController = new ThreatController();
     private assetController = new AssetController();
-    private categoryController = new CategoryController();
-    private ownerController = new OwnerContrller();
     state: any;
 
     constructor(props: any){
@@ -32,9 +30,6 @@ export default class ThreatEvaluationView extends Component{
         this.state = {
             threats: null,
             assets: null,
-            categories: null,
-            owners: null,
-            editingOwner: new Owner(),
             loading: true
         }
         this.assetDropdown = this.assetDropdown.bind(this);
@@ -47,8 +42,6 @@ export default class ThreatEvaluationView extends Component{
         this.setState({
             threats: await this.threatController.getThreatsForTable(),
             assets: await this.assetController.getAssets(),
-            categories: await this.categoryController.getCategpries(),
-            owners: await this.ownerController.getOwners(),
             loading: false
         });
     };
@@ -56,12 +49,12 @@ export default class ThreatEvaluationView extends Component{
     assetDropdown(threat: Threat){
         return (
             <div>
-                <Dropdown appendTo={document.body} options={this.state.assets} optionLabel="name" optionValue={"name"}
-                          placeholder={"Select an Asset"} value={threat.assetName} onChange={e => {
+                <Dropdown appendTo={document.body} options={this.state.assets} optionLabel="name"
+                          placeholder={"Select an Asset"} value={threat.asset} onChange={e => {
                     let i = this.state.threats.findIndex((t: Threat) => t.id === threat.id);
                     let threatsCopy = [...this.state.threats];
                     let threatCopy: Threat = {...threatsCopy[i]};
-                    threatCopy.assetName = e.value;
+                    threatCopy.asset = e.value;
                     threatsCopy[i] = threatCopy;
                     this.setState({threats: threatsCopy});
                     this.threatController.updateThreat(threatCopy).then(n => {
@@ -124,8 +117,8 @@ export default class ThreatEvaluationView extends Component{
     }
 
     async refreshThreats(){
-        this.setState({loading: true});
-        this.setState({
+        await this.setState({loading: true});
+        await this.setState({
             threats: await this.threatController.getThreatsForTable(),
             loading: false
         });
@@ -139,7 +132,7 @@ export default class ThreatEvaluationView extends Component{
             <div style={{width:"100%", height:"100%"}} className="p-card">
                 <DataTable loading={this.state.loading} value={this.state.threats} sortMode="multiple"
                            className="p-datatable-striped" resizableColumns columnResizeMode="fit" header={header}>
-                    <Column field="assetName" header="Asset Name" sortable body={this.assetDropdown}/>
+                    <Column field="assetName" header="Asset Name" body={this.assetDropdown}/>
                     <Column field="name" header="Threat Name" sortable body={this.threatNameTemplate}/>
                     <Column field="name" header="Threat Level" sortable body={this.threatLevelTemplate}/>
                     <Column field="name" header="Vulnerability Level" sortable body={this.vulLevelTemplate}/>

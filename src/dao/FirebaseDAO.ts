@@ -103,19 +103,34 @@ export default class FirebaseDAO {
 
     async getThreats(){
         let allThreats: Threat[] = [];
-        await this.db.ref("threats").once("value", snap => {
-            snap.forEach(threat => {
-                const t: Threat = threat.val();
-                t.id = threat.key ?? '';
-                allThreats.push(t)
+        let js: any[] = [];
+
+        await this.db.ref("threats").once("value", async snap => {
+            await snap.forEach(threat => {
+                js.push(threat);
             })
-        })
+        });
+        for(let threat of js){
+            let asset: Asset = new Asset();
+            await this.db.ref(`assets/${threat.val().assetId}`).once("value", snap => {
+                asset = snap.val();
+            });
+            let temp = threat.val();
+            delete temp.assetId;
+            const t: Threat = temp;
+            t.asset = asset;
+            t.id = threat.key ?? '';
+            allThreats.push(t);
+        }
         return allThreats;
     }
 
     async addThreat(threat: Threat){
         try{
-            await this.db.ref("threats").push(threat);
+            let {asset, ...t} = threat;
+            // @ts-ignore
+            t["assetId"] = asset.id;
+            await this.db.ref("threats").push(t);
             return true;
         }
         catch (e){
@@ -126,7 +141,10 @@ export default class FirebaseDAO {
 
     async updateThreat(threat: Threat){
         try{
-            await this.db.ref(`threats/${threat.id}`).set(threat);
+            let {asset, ...t} = threat;
+            // @ts-ignore
+            t["assetId"] = asset.id;
+            await this.db.ref(`threats/${threat.id}`).set(t);
             return true;
         }
         catch (e){

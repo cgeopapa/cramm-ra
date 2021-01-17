@@ -1,5 +1,6 @@
 import {ThreatLevels} from "./ThreatLevels";
 import {VulLevels} from "./VulLevels";
+import Asset from "./Asset";
 
 export default class Threat
 {
@@ -7,7 +8,7 @@ export default class Threat
         public name: string = "",
         public threatLevel: ThreatLevels = 0,
         public vulLevel: VulLevels = 0,
-        public assetName: string = "",
+        public asset: Asset = new Asset(),
         public id: string = "",
     ) {
     }
