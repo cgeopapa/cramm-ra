@@ -3,9 +3,9 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 
-import { Component } from "react";
-import { Button } from 'primereact/button';
-import { Link } from 'react-router-dom';
+import {Component} from "react";
+import {Button} from 'primereact/button';
+import {Link} from 'react-router-dom';
 
 export default class HomeView extends Component{
     render(){
@@ -41,7 +41,9 @@ export default class HomeView extends Component{
                     style={{backgroundColor: "#00fc", width:"100%"}}>
                         <h2 className="p-m-2 p-text-normal"
                         style={{color:"white"}}>Results Table</h2>
-                        <Button label="Under Construction..." disabled className="p-button-raised p-button-rounded"/>
+                        <Link to="/results">
+                            <Button label="Show Results" className="p-button-raised p-button-rounded"/>
+                        </Link>
                     </div>
                 </div>
             </div>

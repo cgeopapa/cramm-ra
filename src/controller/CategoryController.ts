@@ -1,6 +1,6 @@
 import FirebasaDAO from "../dao/FirebaseDAO";
 
-export default class AssetController {
+export default class CategoryController {
     private dao = new FirebasaDAO();
     
     async getCategpries(){
