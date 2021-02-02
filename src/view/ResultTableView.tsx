@@ -20,7 +20,6 @@ export default class ResultTableView extends Component{
     private threatController: ThreatController = new ThreatController();
     private assetController: AssetController = new AssetController();
     private scales: Scales = new Scales();
-    private op: any;
 
     state: any;
 
@@ -46,12 +45,13 @@ export default class ResultTableView extends Component{
 
     assetEvac(threat: Threat){
         let asset: Asset = threat.asset;
+        let op: any;
         return(
             <div className={"p-d-flex p-ai-center"}>
                 {this.assetController.getOverallScore(asset)}
                 <Button icon="pi pi-search" className="p-button-rounded p-button-text p-mx-2"
-                        onClick={(e) => this.op.toggle(e)}/>
-                <OverlayPanel showCloseIcon ref={(el) => this.op = el}>
+                        onClick={(e) => op.toggle(e)}/>
+                <OverlayPanel showCloseIcon ref={(el) => op = el}>
                     <div className={"p-d-flex p-flex-column"}>
                         <table style={{width:"auto"}}>
                             <tr>
