@@ -27,3 +27,5 @@ sampledata/
 
 #env
 .env
+
+.idea/*

@@ -36,8 +36,12 @@ export default class AssetEvaluationView extends Component{
     }
 
     numField(asset: any, field: string){
+        const disabled = !this.shouldNumField(asset, field);
+        const tooltip = disabled? "This field is not supported because of the category of this asset" : "";
+
         return (
-            <InputNumber value={asset[field]} showButtons min={1} max={10} style={{width: '100%'}}
+            <InputNumber value={asset[field]} showButtons min={0} max={10} style={{width: '100%'}} 
+            disabled={disabled} tooltip={tooltip}
             onValueChange={(e) => {
                 let i = this.state.assets.findIndex((a: Asset) => a.id === asset.id);
                 let assets = [...this.state.assets];
@@ -48,6 +52,26 @@ export default class AssetEvaluationView extends Component{
                 this.assetsController.updateAsset(ass);
             }} />
         );
+    }
+
+    shouldNumField(asset: Asset, field: string): boolean{
+        if(asset.category.id){
+            const categoryId = +asset.category.id;
+
+            if(categoryId <= 5){
+                return (field === "intTotal" || field === "intSome");
+            }
+            else if(categoryId <= 12){
+                return true;
+            }
+            else if(categoryId <= 13){
+                return (field.startsWith("av"));
+            }
+            else{
+                return true
+            }
+        }
+        return false;
     }
 
     confCalc(asset: Asset){
