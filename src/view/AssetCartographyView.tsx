@@ -10,6 +10,7 @@ import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
 import { OverlayPanel } from 'primereact/overlaypanel';
+import { Tooltip } from 'primereact/tooltip';
 import AssetController from '../controller/AssetController';
 import CategoryController from '../controller/CategoryController';
 import Owner from '../model/Owner';
@@ -163,16 +164,22 @@ export default class AssetCartographyView extends Component{
         const header = (
             <h1 className="p-text-light p-m-0">Asset Chartography tool</h1>
         )
+        const locationHeader = (
+            <div style={{width:"auto"}}>
+                <Tooltip target=".customClassName" mouseTrack mouseTrackLeft={10} />
+                <div className="customClassName" data-pr-tooltip="Located/Installed/Saved at..">Location</div>
+            </div>
+        )
         return (
             <div style={{width:"100%", height:"100%"}} className="p-card">
                 <DataTable loading={this.state.loading} value={this.state.assets} editMode="row" sortMode="multiple" className="p-datatable-striped"
                 resizableColumns columnResizeMode="fit" header={header}
                 onRowEditInit={(e) => this.onRowEditInit(e)} onRowEditCancel={(e) => this.onRowEditCancel(e)} onRowEditSave={(e) => this.onRowEditSave(e)}>
-                    <Column field="name" header="Asset Name" sortable editor={(e) => this.inputTextEditor(e.rowData, "name")}/>
-                    <Column field="description" header="Description" sortable editor={(e) => this.inputTextEditor(e.rowData, "description")}/>
-                    <Column field="category" header="Category" sortable body={this.categoryTemplate} editor={(e) => this.inputCategoryEditor(e.rowData)}/>
-                    <Column field="owner" header="Owner" sortable body={this.ownerTemplate} editor={(e) => this.inputOwnerEditor(e.rowData)}/>
-                    <Column field="location" header="Location" sortable editor={(e) => this.inputLocationEditor(e.rowData)}/>
+                    <Column field="name" header="Asset Name" editor={(e) => this.inputTextEditor(e.rowData, "name")}/>
+                    <Column field="description" header="Description" editor={(e) => this.inputTextEditor(e.rowData, "description")}/>
+                    <Column field="category" header="Category" body={this.categoryTemplate} editor={(e) => this.inputCategoryEditor(e.rowData)}/>
+                    <Column field="owner" header="Owner" body={this.ownerTemplate} editor={(e) => this.inputOwnerEditor(e.rowData)}/>
+                    <Column field="location" header={locationHeader} editor={(e) => this.inputLocationEditor(e.rowData)}/>
                     <Column rowEditor headerStyle={{ width: '7rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
                 </DataTable>
             </div>
