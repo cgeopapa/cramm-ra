@@ -4,6 +4,7 @@ import * as dotenv from 'dotenv';
 import Category from '../model/Category';
 import Owner from '../model/Owner';
 import Threat from "../model/Threat";
+import CategoryThreat from '../model/CategoryThreat';
 
 export default class FirebaseDAO {
     private app: firebase.app.App;
@@ -59,8 +60,24 @@ export default class FirebaseDAO {
         let allCategories: Category[] = [];
         await this.db.ref("category").once("value", snap => {
             snap.forEach(category => {
+                let categoryThreats: CategoryThreat[] = [];
+                const threats = category.val().categiryThreats;
+                if(threats){
+                    for(let i = 1; i < threats.length; i++)
+                    {
+                        let categoryThreat = new CategoryThreat();
+                        categoryThreat.name = threats[i].name;
+                        for(let j = 1; j < threats[i].controls.length; j++)
+                        {
+                            categoryThreat.controls.push(threats[i].controls[j]);
+                        }
+                        categoryThreats.push(categoryThreat);
+                    }
+                }
+
                 allCategories.push(new Category(
                     category.val().name,
+                    categoryThreats,
                     category.key ?? ''
                 ))
             })
