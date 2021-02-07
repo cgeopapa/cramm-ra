@@ -10,13 +10,16 @@ import {InputNumber} from 'primereact/inputnumber';
 import {Dropdown} from 'primereact/dropdown';
 import {OverlayPanel} from 'primereact/overlaypanel';
 import {Button} from "primereact/button";
-import {InputTextarea} from 'primereact/inputtextarea';
+import {Checkbox} from 'primereact/checkbox';
 import ThreatController from "../controller/ThreatController";
 import AssetController from "../controller/AssetController";
 import Threat from "../model/Threat";
 import Asset from "../model/Asset";
 import {ThreatLevels} from "../model/ThreatLevels";
 import {VulLevels} from "../model/VulLevels";
+import Category from '../model/Category';
+import CategoryThreat from '../model/CategoryThreat';
+import { waitFor } from '@testing-library/react';
 
 export default class ThreatEvaluationView extends Component{
     private threatController = new ThreatController();
@@ -200,9 +203,24 @@ export default class ThreatEvaluationView extends Component{
     }
 
     rowExpansionTemplate(asset: Asset){
+        const controlsList = (categoryThreat: CategoryThreat) => {
+            return (
+                <span>
+                    {categoryThreat.controls.map((control) => {
+                        return(
+                        <div className="p-field-checkbox">
+                            <Checkbox inputId={control.id} name="category" 
+                                checked={true} />
+                            <label htmlFor={control.id}>{control.name}</label>
+                        </div>
+                    )})}
+                </span>
+            );
+        }
         return(
             <DataTable value={asset.category.threats} className="p-card p-datatable-sm">
-                <Column field="name" header="Threat"/>
+                <Column field="name" header="Threat" headerStyle={{"width": "15em"}}/>
+                <Column header="Controls" body={controlsList}/>
             </DataTable>
         );
     }

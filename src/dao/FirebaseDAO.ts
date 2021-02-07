@@ -63,13 +63,17 @@ export default class FirebaseDAO {
                 let categoryThreats: CategoryThreat[] = [];
                 const threats = category.val().categiryThreats;
                 if(threats){
-                    for(let i = 1; i < threats.length; i++)
+                    for(let i in threats)
                     {
                         let categoryThreat = new CategoryThreat();
                         categoryThreat.name = threats[i].name;
-                        for(let j = 1; j < threats[i].controls.length; j++)
+                        categoryThreat.id = i;
+                        for(let j in threats[i].controls)
                         {
-                            categoryThreat.controls.push(threats[i].controls[j]);
+                            categoryThreat.controls.push({
+                                id: j,
+                                name: threats[i].controls[j]
+                            });
                         }
                         categoryThreats.push(categoryThreat);
                     }
@@ -85,21 +89,59 @@ export default class FirebaseDAO {
         return allCategories;
     }
 
+    async getCategory(id: string){
+        let retCategory = new Category();
+        await this.db.ref("category/"+id).once("value", category => {
+            let categoryThreats: CategoryThreat[] = [];
+            const threats = category.val().categiryThreats;
+            if(threats){
+                for(let i in threats)
+                {
+                    let categoryThreat = new CategoryThreat();
+                    categoryThreat.name = threats[i].name;
+                    categoryThreat.id = i;
+                    for(let j in threats[i].controls)
+                    {
+                        categoryThreat.controls.push({
+                            id: j,
+                            name: threats[i].controls[j]
+                        });
+                    }
+                    categoryThreats.push(categoryThreat);
+                }
+            }
+
+            retCategory = new Category(
+                category.val().name,
+                categoryThreats,
+                category.key ?? ''
+            )
+        })
+        return retCategory;
+    }
+
     async getAssets() {
         let allAssets: Asset[] = [];
+        let js: any[] = [];
         await this.db.ref("assets").once("value", snap => {
             snap.forEach(asset => {
                 const a: Asset = asset.val();
                 a.id = asset.key ?? '';
-                allAssets.push(a)
+                js.push(a)
             });
         })
+        for(let asset of js){
+            asset.category = await this.getCategory(asset.category);
+            allAssets.push(asset);
+        }
         return allAssets;
     }
 
     async addAsset(asset: Asset) {
         try{
-            const ref: any = await this.db.ref("assets").push(asset);
+            let toSaveAsset: any = asset;
+            toSaveAsset.category = asset.category.id;
+            const ref: any = await this.db.ref("assets").push(toSaveAsset);
             return ref.key;
         }
         catch(e){

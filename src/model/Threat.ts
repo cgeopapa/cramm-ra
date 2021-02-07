@@ -9,6 +9,7 @@ export default class Threat
         public threatLevel: ThreatLevels = 0,
         public vulLevel: VulLevels = 0,
         public asset: Asset = new Asset(),
+        public controls: string[] = [],
         public id: string = "",
     ) {
     }
