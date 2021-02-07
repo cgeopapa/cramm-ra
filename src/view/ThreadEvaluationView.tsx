@@ -31,14 +31,14 @@ export default class ThreatEvaluationView extends Component{
 
         this.state = {
             threats: null,
-            assets: null,
+            assets: [],
             loading: true,
             expandedRows: []
         }
-        this.threatNameTemplate = this.threatNameTemplate.bind(this);
         this.threatLevelTemplate = this.threatLevelTemplate.bind(this);
         this.vulLevelTemplate = this.vulLevelTemplate.bind(this);
         this.assetEvac = this.assetEvac.bind(this);
+        this.rowExpansionTemplate = this.rowExpansionTemplate.bind(this);
     }
 
     async componentDidMount(){
@@ -48,33 +48,6 @@ export default class ThreatEvaluationView extends Component{
             loading: false
         });
     };
-
-    threatNameTemplate(threat: Threat){
-        const threats: string[] = [];
-        threat.asset.category.threats.forEach(threat => threats.push(threat.name));
-
-        return (
-            <Dropdown appendTo={document.body} placeholder={"Threat Description"} value={threat.name} 
-            options={threat.asset.category.threats} optionLabel="name" onChange={e =>{
-                let i = this.state.threats.findIndex((t: Threat) => t.id === threat.id);
-                let threatsCopy = [...this.state.threats];
-                let threatCopy: Threat = {...threatsCopy[i]};
-                threatCopy.name = e.target.value;
-                threatsCopy[i] = threatCopy;
-                this.setState({threats: threatsCopy});
-                this.threatController.updateThreat(threatCopy);
-        }}/>
-            // <InputTextarea placeholder={"Threat Description"} value={threat.name} onChange={e =>{
-            //     let i = this.state.threats.findIndex((t: Threat) => t.id === threat.id);
-            //     let threatsCopy = [...this.state.threats];
-            //     let threatCopy: Threat = {...threatsCopy[i]};
-            //     threatCopy.name = e.currentTarget.value;
-            //     threatsCopy[i] = threatCopy;
-            //     this.setState({threats: threatsCopy});
-            //     this.threatController.updateThreat(threatCopy);
-            // }}/>
-        )
-    }
 
     threatLevelTemplate(threat: Threat){
         return(
@@ -203,14 +176,25 @@ export default class ThreatEvaluationView extends Component{
     }
 
     rowExpansionTemplate(asset: Asset){
+        const assetsCp = this.state.assets;
+        const realAsset: Asset = assetsCp.find((a: Asset) => a.id === asset.id);
         const controlsList = (categoryThreat: CategoryThreat) => {
+            const threat: any = realAsset.threats.find((t: Threat) => t.id === categoryThreat.id);
             return (
                 <span>
                     {categoryThreat.controls.map((control) => {
                         return(
                         <div className="p-field-checkbox">
                             <Checkbox inputId={control.id} name="category" 
-                                checked={true} />
+                                checked={threat.controls.includes(control.id)} onChange={() => {
+                                    if(threat.controls.includes(control.id)){
+                                        threat.controls.splice(threat.controls.indexOf(control.id), 1);
+                                    }
+                                    else {
+                                        threat.controls.push(control.id);
+                                    }
+                                    this.setState({assets: assetsCp});
+                                }}/>
                             <label htmlFor={control.id}>{control.name}</label>
                         </div>
                     )})}
@@ -218,7 +202,7 @@ export default class ThreatEvaluationView extends Component{
             );
         }
         return(
-            <DataTable value={asset.category.threats} className="p-card p-datatable-sm">
+            <DataTable value={realAsset.category.threats} className="p-card p-datatable-sm">
                 <Column field="name" header="Threat" headerStyle={{"width": "15em"}}/>
                 <Column header="Controls" body={controlsList}/>
             </DataTable>

@@ -33,7 +33,7 @@ export default class ThreatController{
 
     public getDangerLevel(threat: Threat){
         return (
-            this.scales.econLevelScale[this.assetController.getOverallScore(threat.asset)] *
+            // this.scales.econLevelScale[this.assetController.getOverallScore(threat.asset)] *
             this.scales.threatLevelScale[threat.threatLevel] *
             this.scales.vulLevelScale[threat.vulLevel]
         )

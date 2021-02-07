@@ -177,7 +177,7 @@ export default class FirebaseDAO {
             let temp = threat.val();
             delete temp.assetId;
             const t: Threat = temp;
-            t.asset = asset;
+            // t.asset = asset;
             t.id = threat.key ?? '';
             allThreats.push(t);
         }
@@ -186,10 +186,10 @@ export default class FirebaseDAO {
 
     async addThreat(threat: Threat){
         try{
-            let {asset, ...t} = threat;
-            // @ts-ignore
-            t["assetId"] = asset.id;
-            await this.db.ref("threats").push(t);
+            // let {asset, ...t} = threat;
+            // // @ts-ignore
+            // t["assetId"] = asset.id;
+            // await this.db.ref("threats").push(t);
             return true;
         }
         catch (e){
@@ -200,10 +200,10 @@ export default class FirebaseDAO {
 
     async updateThreat(threat: Threat){
         try{
-            let {asset, ...t} = threat;
-            // @ts-ignore
-            t["assetId"] = asset.id;
-            await this.db.ref(`threats/${threat.id}`).set(t);
+            // let {asset, ...t} = threat;
+            // // @ts-ignore
+            // t["assetId"] = asset.id;
+            // await this.db.ref(`threats/${threat.id}`).set(t);
             return true;
         }
         catch (e){

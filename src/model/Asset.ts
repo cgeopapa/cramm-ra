@@ -1,5 +1,6 @@
 import Category from "./Category";
 import Owner from "./Owner";
+import Threat from "./Threat";
 
 export default class Asset
 {
@@ -7,6 +8,7 @@ export default class Asset
         public name: string = '',
         public description: string = '',
         public category: Category = new Category(),
+        public threats: Threat[] = [],
         public owner: Owner = new Owner(),
         public location: string = '',
         public confInternal: number = 0,

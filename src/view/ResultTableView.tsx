@@ -44,77 +44,78 @@ export default class ResultTableView extends Component{
     }
 
     assetEvac(threat: Threat){
-        let asset: Asset = threat.asset;
-        let op: any;
-        return(
-            <div className={"p-d-flex p-ai-center"}>
-                {this.assetController.getOverallScore(asset)}
-                <Button icon="pi pi-search" className="p-button-rounded p-button-text p-mx-2"
-                        onClick={(e) => op.toggle(e)}/>
-                <OverlayPanel showCloseIcon ref={(el) => op = el}>
-                    <div className={"p-d-flex p-flex-column"}>
-                        <table style={{width:"auto"}}>
-                            <tr>
-                                <th>Asset Evaluation Score</th>
-                                <th>{this.assetController.getOverallScore(asset)}</th>
-                            </tr>
-                            <tr>
-                                <td>Internal Reveal</td>
-                                <td>{asset.confInternal}</td>
-                            </tr>
-                            <tr>
-                                <td>External Reveal</td>
-                                <td>{asset.confExternal}</td>
-                            </tr>
-                            <tr>
-                                <th>Confidentiality Score</th>
-                                <th>{this.assetController.getConfidentialityScore(asset)}</th>
-                            </tr>
-                            <tr>
-                                <td>Some destruction</td>
-                                <td>{asset.intSome}</td>
-                            </tr>
-                            <tr>
-                                <td>Total destruction</td>
-                                <td>{asset.intTotal}</td>
-                            </tr>
-                            <tr>
-                                <th>Integrity Score</th>
-                                <th>{this.assetController.getIntegrityScore(asset)}</th>
-                            </tr>
-                            <tr>
-                                <td>30 minutes</td>
-                                <td>{asset.av30m}</td>
-                            </tr>
-                            <tr>
-                                <td>1 hour</td>
-                                <td>{asset.av1h}</td>
-                            </tr>
-                            <tr>
-                                <td>1 day</td>
-                                <td>{asset.av1d}</td>
-                            </tr>
-                            <tr>
-                                <td>2 days</td>
-                                <td>{asset.av2d}</td>
-                            </tr>
-                            <tr>
-                                <td>1 week</td>
-                                <td>{asset.av1w}</td>
-                            </tr>
-                            <tr>
-                                <td>1 month</td>
-                                <td>{asset.av1m}</td>
-                            </tr>
-                            <tr>
-                                <th>Availability Score</th>
-                                <th>{this.assetController.getAvailabilityScore(asset)}</th>
-                            </tr>
-                        </table>
-                    </div>
-                </OverlayPanel>
-            </div>
-        );
+        // let asset: Asset = threat.asset;
+        // let op: any;
+        // return(
+        //     <div className={"p-d-flex p-ai-center"}>
+        //         {this.assetController.getOverallScore(asset)}
+        //         <Button icon="pi pi-search" className="p-button-rounded p-button-text p-mx-2"
+        //                 onClick={(e) => op.toggle(e)}/>
+        //         <OverlayPanel showCloseIcon ref={(el) => op = el}>
+        //             <div className={"p-d-flex p-flex-column"}>
+        //                 <table style={{width:"auto"}}>
+        //                     <tr>
+        //                         <th>Asset Evaluation Score</th>
+        //                         <th>{this.assetController.getOverallScore(asset)}</th>
+        //                     </tr>
+        //                     <tr>
+        //                         <td>Internal Reveal</td>
+        //                         <td>{asset.confInternal}</td>
+        //                     </tr>
+        //                     <tr>
+        //                         <td>External Reveal</td>
+        //                         <td>{asset.confExternal}</td>
+        //                     </tr>
+        //                     <tr>
+        //                         <th>Confidentiality Score</th>
+        //                         <th>{this.assetController.getConfidentialityScore(asset)}</th>
+        //                     </tr>
+        //                     <tr>
+        //                         <td>Some destruction</td>
+        //                         <td>{asset.intSome}</td>
+        //                     </tr>
+        //                     <tr>
+        //                         <td>Total destruction</td>
+        //                         <td>{asset.intTotal}</td>
+        //                     </tr>
+        //                     <tr>
+        //                         <th>Integrity Score</th>
+        //                         <th>{this.assetController.getIntegrityScore(asset)}</th>
+        //                     </tr>
+        //                     <tr>
+        //                         <td>30 minutes</td>
+        //                         <td>{asset.av30m}</td>
+        //                     </tr>
+        //                     <tr>
+        //                         <td>1 hour</td>
+        //                         <td>{asset.av1h}</td>
+        //                     </tr>
+        //                     <tr>
+        //                         <td>1 day</td>
+        //                         <td>{asset.av1d}</td>
+        //                     </tr>
+        //                     <tr>
+        //                         <td>2 days</td>
+        //                         <td>{asset.av2d}</td>
+        //                     </tr>
+        //                     <tr>
+        //                         <td>1 week</td>
+        //                         <td>{asset.av1w}</td>
+        //                     </tr>
+        //                     <tr>
+        //                         <td>1 month</td>
+        //                         <td>{asset.av1m}</td>
+        //                     </tr>
+        //                     <tr>
+        //                         <th>Availability Score</th>
+        //                         <th>{this.assetController.getAvailabilityScore(asset)}</th>
+        //                     </tr>
+        //                 </table>
+        //             </div>
+        //         </OverlayPanel>
+        //     </div>
+        // );
+        return ("dd")
     }
 
     threatLevel(threat: Threat){

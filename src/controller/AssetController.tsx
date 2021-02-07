@@ -1,5 +1,6 @@
 import FirebasaDAO from "../dao/FirebaseDAO";
 import Asset from "../model/Asset";
+import Threat from "../model/Threat";
 
 export default class AssetController {
     private dao = new FirebasaDAO();
@@ -18,6 +19,11 @@ export default class AssetController {
         if(asset.id === 'new'){
             let assetNoId = asset;
             delete assetNoId.id;
+
+            for(let threat of assetNoId.category.threats){
+                assetNoId.threats.push(new Threat(threat.name, threat.id));
+            }
+
             return await this.dao.addAsset(asset);
         }
         else {
