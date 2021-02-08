@@ -32,8 +32,6 @@ export default class ThreatEvaluationView extends Component{
             loading: true,
             expandedRows: []
         }
-        this.threatLevelTemplate = this.threatLevelTemplate.bind(this);
-        this.vulLevelTemplate = this.vulLevelTemplate.bind(this);
         this.assetEvac = this.assetEvac.bind(this);
         this.rowExpansionTemplate = this.rowExpansionTemplate.bind(this);
     }
@@ -45,42 +43,6 @@ export default class ThreatEvaluationView extends Component{
             loading: false
         });
     };
-
-    threatLevelTemplate(threat: Threat){
-        return(
-            <div>
-                <InputNumber value={threat.threatLevel} showButtons buttonLayout="horizontal" min={0} max={4} style={{width: "100%"}} suffix={" " + ThreatLevels[threat.threatLevel]}
-                             decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"
-                             onChange={e => {
-                                 let i = this.state.threats.findIndex((t: Threat) => t.id === threat.id);
-                                 let threatsCopy = [...this.state.threats];
-                                 let threatCopy: Threat = {...threatsCopy[i]};
-                                 threatCopy.threatLevel = e.value;
-                                 threatsCopy[i] = threatCopy;
-                                 this.setState({threats: threatsCopy});
-                                 this.threatController.updateThreat(threatCopy);
-                             }}/>
-            </div>
-        )
-    }
-
-    vulLevelTemplate(threat: Threat){
-        return(
-            <div>
-                <InputNumber value={threat.vulLevel} showButtons buttonLayout="horizontal" min={0} max={2} style={{width: "100%"}} suffix={" " + VulLevels[threat.vulLevel]}
-                             decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"
-                             onChange={e => {
-                                 let i = this.state.threats.findIndex((t: Threat) => t.id === threat.id);
-                                 let threatsCopy = [...this.state.threats];
-                                 let threatCopy: Threat = {...threatsCopy[i]};
-                                 threatCopy.vulLevel = e.value;
-                                 threatsCopy[i] = threatCopy;
-                                 this.setState({threats: threatsCopy});
-                                 this.threatController.updateThreat(threatCopy);
-                             }}/>
-            </div>
-        )
-    }
 
     async refreshThreats(){
         await this.setState({loading: true});
@@ -199,10 +161,40 @@ export default class ThreatEvaluationView extends Component{
                 </span>
             );
         }
+        const vulLevelTemplate = (categoryThreat: CategoryThreat) => {
+            const threat: any = realAsset.threats.find((t: Threat) => t.id === categoryThreat.id);
+            return(
+                <div>
+                    <InputNumber value={threat.vulLevel} showButtons buttonLayout="horizontal" min={0} max={2} style={{width: "100%"}} suffix={" " + VulLevels[threat.vulLevel]}
+                        decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"
+                        onChange={e => {
+                            threat.vulLevel = e.value;
+                            this.setState({assets: assetsCp});
+                            this.assetController.updateAsset(realAsset);
+                        }}/>
+                </div>
+            )
+        }
+        const threatLevelTemplate = (categoryThreat: CategoryThreat) => {
+            const threat: any = realAsset.threats.find((t: Threat) => t.id === categoryThreat.id);
+            return(
+                <div>
+                    <InputNumber value={threat.threatLevel} showButtons buttonLayout="horizontal" min={0} max={4} style={{width: "100%"}} suffix={" " + ThreatLevels[threat.threatLevel]}
+                        decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"
+                        onChange={e => {
+                            threat.threatLevel = e.value;
+                            this.setState({assets: assetsCp});
+                            this.assetController.updateAsset(realAsset);
+                        }}/>
+                </div>
+            )
+        }
         return(
-            <DataTable value={realAsset.category.threats} className="p-card p-datatable-sm">
+            <DataTable value={realAsset.category.threats} className="p-card p-datatable-sm" resizableColumns columnResizeMode="fit">
                 <Column field="name" header="Threat" headerStyle={{"width": "15em"}}/>
                 <Column header="Controls" body={controlsList}/>
+                <Column header="Vulnerability Level" body={vulLevelTemplate} style={{width: "15em"}}/>
+                <Column header="Threat Level" body={threatLevelTemplate} style={{width: "15em"}}/>
             </DataTable>
         );
     }
