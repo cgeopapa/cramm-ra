@@ -92,7 +92,7 @@ export default class FirebaseDAO {
     async getCategory(id: string){
         let retCategory = new Category();
         await this.db.ref("category/"+id).once("value", category => {
-            let categoryThreats: CategoryThreat[] = [];
+            let categoryThreats: CategoryThreat[] = new Array<CategoryThreat>();
             const threats = category.val().categiryThreats;
             if(threats){
                 for(let i in threats)
@@ -151,7 +151,9 @@ export default class FirebaseDAO {
 
     async updateAsset(asset: Asset) {
         try{
-            await this.db.ref(`assets/${asset.id}`).set(asset);
+            let assetCp: any = {...asset};
+            assetCp.category = asset.category.id;
+            await this.db.ref(`assets/${asset.id}`).set(assetCp);
             return true;
         }
         catch(e){

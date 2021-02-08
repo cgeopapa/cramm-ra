@@ -193,6 +193,7 @@ export default class ThreatEvaluationView extends Component{
                                     else {
                                         threat.controls.push(control.id);
                                     }
+                                    this.assetController.updateAsset(realAsset);
                                     this.setState({assets: assetsCp});
                                 }}/>
                             <label htmlFor={control.id}>{control.name}</label>
