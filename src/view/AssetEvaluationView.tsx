@@ -13,6 +13,7 @@ import { Row } from 'primereact/row';
 import { InputNumber } from 'primereact/inputnumber';
 import AssetController from '../controller/AssetController';
 import Asset from '../model/Asset';
+import TopMenuView from './TopMenuView';
 
 export default class AssetEvaluationView extends Component{
     private assetsController = new AssetController();
@@ -171,6 +172,7 @@ export default class AssetEvaluationView extends Component{
 
         return(
             <div style={{width:"100%", height:"100%"}} className="card">
+                <TopMenuView/>
                 <DataTable loading={this.state.loading} value={this.state.assets}
                 sortMode="multiple" className="p-datatable-striped p-datatable-gridlines p-datatable-sm p-card" selectionMode="single"
                 header={header} headerColumnGroup={headerGroup} resizableColumns rowClassName={rowClass}

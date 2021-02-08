@@ -17,6 +17,7 @@ import Asset from "../model/Asset";
 import {ThreatLevels} from "../model/ThreatLevels";
 import {VulLevels} from "../model/VulLevels";
 import CategoryThreat from '../model/CategoryThreat';
+import TopMenuView from './TopMenuView';
 
 export default class ThreatEvaluationView extends Component{
     private threatController = new ThreatController();
@@ -205,6 +206,7 @@ export default class ThreatEvaluationView extends Component{
         )
         return (
             <div style={{width:"100%", height:"100%"}} className="p-card">
+                <TopMenuView/>
                 <DataTable loading={this.state.loading} value={this.state.assets} sortMode="multiple"
                            rowExpansionTemplate={this.rowExpansionTemplate} expandedRows={this.state.expandedRows}
                            onRowToggle={(e) => this.setState({expandedRows: e.data})}

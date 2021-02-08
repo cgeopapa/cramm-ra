@@ -3,7 +3,7 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
@@ -15,6 +15,7 @@ import AssetController from '../controller/AssetController';
 import CategoryController from '../controller/CategoryController';
 import Owner from '../model/Owner';
 import OwnerContrller from '../controller/OwnerController';
+import TopMenuView from './TopMenuView';
 
 export default class AssetCartographyView extends Component{
     private assetsController = new AssetController();
@@ -172,6 +173,7 @@ export default class AssetCartographyView extends Component{
         )
         return (
             <div style={{width:"100%", height:"100%"}} className="p-card">
+                <TopMenuView/>
                 <DataTable loading={this.state.loading} value={this.state.assets} editMode="row" sortMode="multiple" className="p-datatable-striped"
                 resizableColumns columnResizeMode="fit" header={header}
                 onRowEditInit={(e) => this.onRowEditInit(e)} onRowEditCancel={(e) => this.onRowEditCancel(e)} onRowEditSave={(e) => this.onRowEditSave(e)}>

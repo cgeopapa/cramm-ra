@@ -18,6 +18,7 @@ import {VulLevels} from "../model/VulLevels";
 import Scales from "../model/Scales";
 import Category from '../model/Category';
 import CategoryThreat from '../model/CategoryThreat';
+import TopMenuView from './TopMenuView';
 
 export default class ResultTableView extends Component{
     private threatController: ThreatController = new ThreatController();
@@ -191,17 +192,20 @@ export default class ResultTableView extends Component{
 
     render(){
         return(
-            <DataTable loading={this.state.loading} value={this.state.assets}
-                        rowExpansionTemplate={this.rowExpansionTemplate} expandedRows={this.state.expandedRows}
-                        onRowToggle={(e) => this.setState({expandedRows: e.data})}
-                        className="p-datatable-sm p-datatable-striped">
-                <Column expander style={{ width: '4em' }} />
-                <Column field={"name"} header={"Asset Name"}/>
-                <Column field={"description"} header={"Asset Description"}/>
-                <Column body={this.assetEvac} header={"Asset Evaluation Score"}/>
-                <Column body={this.economicRisk} header={"Overall economic Risk"}/>
-                <Column body={this.hazardLevel} header={"Level of Risk"}/>
-            </DataTable>
+            <div style={{width:"100%", height:"100%"}} className="card">
+                <TopMenuView/>
+                <DataTable loading={this.state.loading} value={this.state.assets}
+                            rowExpansionTemplate={this.rowExpansionTemplate} expandedRows={this.state.expandedRows}
+                            onRowToggle={(e) => this.setState({expandedRows: e.data})}
+                            className="p-datatable-sm p-datatable-striped">
+                    <Column expander style={{ width: '4em' }} />
+                    <Column field={"name"} header={"Asset Name"}/>
+                    <Column field={"description"} header={"Asset Description"}/>
+                    <Column body={this.assetEvac} header={"Asset Evaluation Score"}/>
+                    <Column body={this.economicRisk} header={"Overall economic Risk"}/>
+                    <Column body={this.hazardLevel} header={"Level of Risk"}/>
+                </DataTable>
+            </div>
         );
     }
 }
