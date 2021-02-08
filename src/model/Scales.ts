@@ -18,6 +18,7 @@ export default class Scales{
         this.vulLevelScale[VulLevels.Medium] = 0.5;
         this.vulLevelScale[VulLevels.High] = 1;
 
+        this.econLevelScale[0] = 1;
         this.econLevelScale[1] = 1000;
         this.econLevelScale[2] = 10000;
         this.econLevelScale[3] = 30000;

@@ -3,11 +3,10 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 
-import React, {Component} from 'react';
+import {Component} from 'react';
 import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
 import {InputNumber} from 'primereact/inputnumber';
-import {Dropdown} from 'primereact/dropdown';
 import {OverlayPanel} from 'primereact/overlaypanel';
 import {Button} from "primereact/button";
 import {Checkbox} from 'primereact/checkbox';
@@ -17,9 +16,7 @@ import Threat from "../model/Threat";
 import Asset from "../model/Asset";
 import {ThreatLevels} from "../model/ThreatLevels";
 import {VulLevels} from "../model/VulLevels";
-import Category from '../model/Category';
 import CategoryThreat from '../model/CategoryThreat';
-import { waitFor } from '@testing-library/react';
 
 export default class ThreatEvaluationView extends Component{
     private threatController = new ThreatController();
@@ -222,7 +219,7 @@ export default class ThreatEvaluationView extends Component{
                            className="p-datatable-striped" resizableColumns columnResizeMode="fit" header={header}>
                     <Column expander style={{ width: '4em' }} />
                     <Column field="name" header="Asset"/>
-                    <Column field="category.name" header="Category" sortable/>
+                    <Column field="category.name" header="Category"/>
                     <Column field="owner" header="Owner" body={this.ownerTemplate}/>
                     <Column body={this.assetEvac} header={"Asset Evaluation Score"}/>
                 </DataTable>
