@@ -160,23 +160,23 @@ export default class ResultTableView extends Component{
                     const header = (
                         <div className="p-d-flex p-jc-between">
                             <span className="p-m-4">{`Threat: ${threat.name}`}</span>
-                            <div className="p-my-4">
-                                <span className="p-m-4">{`Threat Level: ${threat.threatLevel}`}</span>
-                                <span className="p-m-4">{`Vulnerability Level: ${threat.vulLevel}`}</span>
+                            <div className="p-m-4 p-d-flex p-flex-column" style={{textAlign:"end"}}>
+                                <span>{`Threat Level: ${threat.threatLevel}`}</span>
+                                <span>{`Vulnerability Level: ${threat.vulLevel}`}</span>
                             </div>
                         </div>
                     );
                     return (
-                        <Card header={header} className="p-m-4">
+                        <Card title={header} className="p-mb-4">
                             <div className="p-d-flex p-flex-column p-flex-md-row" style={{width: "100%"}}>
-                                <Card title="Active Controls" className="p-m-2" style={{width: "100%"}}>
+                                <Card title="Active Controls" className="p-mx-2" style={{width: "100%"}}>
                                     <ul>
                                         {act.map((control) => {
                                             return <li>{control}</li>
                                         })}
                                     </ul>
                                 </Card>
-                                <Card title="Recommended Controls" className="p-m-2" style={{width: "100%"}}>
+                                <Card title="Recommended Controls" className="p-mx-2" style={{width: "100%"}}>
                                         {rec.map((control) => {
                                             return <li>{control}</li>
                                         })}
