@@ -157,8 +157,17 @@ export default class ResultTableView extends Component{
                             rec.push(control.name);
                         }
                     }
+                    const header = (
+                        <div className="p-d-flex p-jc-between">
+                            <span className="p-m-4">{`Threat: ${threat.name}`}</span>
+                            <div className="p-my-4">
+                                <span className="p-m-4">{`Threat Level: ${threat.threatLevel}`}</span>
+                                <span className="p-m-4">{`Vulnerability Level: ${threat.vulLevel}`}</span>
+                            </div>
+                        </div>
+                    );
                     return (
-                        <Card title={`Threat: ${threat.name}`} className="p-m-4">
+                        <Card header={header} className="p-m-4">
                             <div className="p-d-flex p-flex-column p-flex-md-row" style={{width: "100%"}}>
                                 <Card title="Active Controls" className="p-m-2" style={{width: "100%"}}>
                                     <ul>
