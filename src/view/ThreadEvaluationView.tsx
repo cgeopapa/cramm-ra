@@ -202,7 +202,7 @@ export default class ThreatEvaluationView extends Component{
 
     render(){
         const header = (
-            <h1 className="p-text-light p-m-0">Threat Evaluation Tool</h1>
+            <h1 className="p-text-light p-m-0">Threat Assessment Tool</h1>
         )
         return (
             <div style={{width:"100%", height:"100%"}} className="p-card">

@@ -24,7 +24,7 @@ export default class HomeView extends Component{
                     <div className="p-d-flex p-ai-center p-flex-column p-p-4 p-card" 
                     style={{backgroundColor: "#00fa", width:"100%"}}>
                         <h2 className="p-m-2 p-text-normal"
-                        style={{color:"white"}}>Step 2: Asset Evaluation</h2>
+                        style={{color:"white"}}>Step 2: Impact Assessment</h2>
                         <Link to="/asset-eval">
                             <Button label="Evaluate Assets" className="p-button-raised p-button-rounded"/>
                         </Link>
@@ -32,7 +32,7 @@ export default class HomeView extends Component{
                     <div className="p-d-flex p-ai-center p-flex-column p-p-4 p-card" 
                     style={{backgroundColor: "#00fb", width:"100%"}}>
                         <h2 className="p-m-2 p-text-normal"
-                        style={{color:"white"}}>Step 3: Threat Evaluation</h2>
+                        style={{color:"white"}}>Step 3: Threat Assessment</h2>
                         <Link to="/threat-eval">
                             <Button label="Evaluate Threats" className="p-button-raised p-button-rounded"/>
                         </Link>

@@ -9,8 +9,8 @@ import { BreadCrumb } from 'primereact/breadcrumb';
 export default class TopMenuView extends Component{
     private items = [
         {label: 'Asset Cartography', url: '/asset-cart'},
-        {label: 'Asset Evaluation', url: '/asset-eval'},
-        {label: 'Threat Evaluation', url: '/threat-eval'},
+        {label: 'Impact Assessment', url: '/asset-eval'},
+        {label: 'Threat Assessment', url: '/threat-eval'},
         {label: 'Results Tables', url: '/results'},
     ];
     private home = { icon: 'pi pi-home', url: '/' }

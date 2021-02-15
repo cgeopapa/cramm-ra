@@ -131,7 +131,7 @@ export default class AssetEvaluationView extends Component{
 
     render(){
         const header = (
-            <h1 className="p-text-light p-m-0">Asset Evaluation tool</h1>
+            <h1 className="p-text-light p-m-0">Impact Assessment tool</h1>
         )
 
         const headerGroup =(
