@@ -20,6 +20,7 @@ import OwnerContrller from '../controller/OwnerController';
 import TopMenuView from './TopMenuView';
 import Asset from '../model/Asset';
 import { link } from 'fs';
+import FooterView from './FooterView';
 
 export default class AssetCartographyView extends Component{
     private assetsController = new AssetController();
@@ -227,6 +228,7 @@ export default class AssetCartographyView extends Component{
                         </div>
                     </TabPanel>
                 </TabView>
+                <FooterView/>
             </div>
         );
     }

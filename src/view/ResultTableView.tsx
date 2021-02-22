@@ -19,6 +19,7 @@ import Scales from "../model/Scales";
 import Category from '../model/Category';
 import CategoryThreat from '../model/CategoryThreat';
 import TopMenuView from './TopMenuView';
+import FooterView from './FooterView';
 
 export default class ResultTableView extends Component{
     private threatController: ThreatController = new ThreatController();
@@ -205,6 +206,7 @@ export default class ResultTableView extends Component{
                     <Column body={this.economicRisk} header={"Overall economic Risk"}/>
                     <Column body={this.hazardLevel} header={"Level of Risk"}/>
                 </DataTable>
+                <FooterView/>
             </div>
         );
     }

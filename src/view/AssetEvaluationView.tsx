@@ -14,6 +14,7 @@ import { InputNumber } from 'primereact/inputnumber';
 import AssetController from '../controller/AssetController';
 import Asset from '../model/Asset';
 import TopMenuView from './TopMenuView';
+import FooterView from './FooterView';
 
 export default class AssetEvaluationView extends Component{
     private assetsController = new AssetController();
@@ -193,6 +194,7 @@ export default class AssetEvaluationView extends Component{
                     <Column body={(e: Asset) => this.avCalc(e)} headerStyle={{ width: '200px' }}/>
                     <Column body={(e: Asset) => this.overallCalc(e)} headerStyle={{ width: '200px' }}/>
                 </DataTable>
+                <FooterView/>
             </div>
         );
     }

@@ -21,7 +21,6 @@ export default class FirebaseDAO {
             messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
             appId: process.env.REACT_APP_APP_ID
           };
-        
         if(!firebase.apps.length){
             this.app = firebase.initializeApp(firebaseConfig);
         }

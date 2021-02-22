@@ -18,6 +18,7 @@ import {ThreatLevels} from "../model/ThreatLevels";
 import {VulLevels} from "../model/VulLevels";
 import CategoryThreat from '../model/CategoryThreat';
 import TopMenuView from './TopMenuView';
+import FooterView from './FooterView';
 
 export default class ThreatEvaluationView extends Component{
     private threatController = new ThreatController();
@@ -217,6 +218,7 @@ export default class ThreatEvaluationView extends Component{
                     <Column field="owner" header="Owner" body={this.ownerTemplate}/>
                     <Column body={this.assetEvac} header={"Asset Evaluation Score"}/>
                 </DataTable>
+                <FooterView/>
             </div>
         );
     }
